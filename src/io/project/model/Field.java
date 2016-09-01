@@ -1,22 +1,46 @@
 package io.project.model;
 
-import java.awt.Point;
+import io.project.model.exceptions.AlreadyOccupiedException;
+import io.project.model.exceptions.InvalidPointException;
 
 public class Field {
-	public static final int FIELD_SIZE = 3;
+	private final int size;
+
+	private final Figure[][] figures;
 	
-	private final Figure[][] figures = new Figure[FIELD_SIZE][FIELD_SIZE];
-	
+		
+	public Field(final int size) {
+		this.size = size;
+		this.figures = new Figure[size][size];
+	}
+
 	public int getSize(){
-		return FIELD_SIZE;
+		return size;
 	}
 	
-	public Figure getFigure(final Point point){
-		return figures[point.x][point.y];
+	public Figure getFigure(final Point point) throws InvalidPointException{
+		if (!checkPoint(point)){
+			throw new InvalidPointException();
+		}
+		return figures[point.getX()][point.getY()];
 	}
 	
-	public boolean setFigure(final Point point, final Figure figure){
-		figures[point.x][point.y] = figure;
+	public boolean setFigure(final Point point, final Figure figure) throws InvalidPointException, AlreadyOccupiedException {
+		if (!checkPoint(point)){
+			throw new InvalidPointException();
+		}
+		if (figures[point.getX()][point.getY()] != null){
+			throw new AlreadyOccupiedException();
+		}
+		figures[point.getX()][point.getY()] = figure;
 		return true;
+	}
+	
+	private boolean checkPoint(final Point point){
+		return chekCoordinate(point.getX()) && chekCoordinate(point.getY());
+	}
+	
+	private boolean chekCoordinate(final int coordinate){
+		return coordinate > 0 && coordinate <= size;
 	}
 }
