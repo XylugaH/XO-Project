@@ -3,20 +3,29 @@ package io.project.model;
 import io.project.model.exceptions.InvalidPointException;
 
 public class Field {
-	private final int size;
+	private final int sizeX;
+	private final int sizeY;
 
 	private final Figure[][] figures;
 	
 		
-	public Field(final int size) {
-		this.size = size;
-		this.figures = new Figure[size][size];
+	public Field(final int sizeX, final int sizeY) {
+		this.sizeX = sizeX;
+		this.sizeY = sizeY;
+		this.figures = new Figure[sizeX][sizeY];
 	}
 
-	public int getSize(){
-		return size;
+
+	public int getSizeX() {
+		return sizeX;
 	}
-	
+
+
+	public int getSizeY() {
+		return sizeY;
+	}
+
+
 	public Figure getFigure(final Point point) throws InvalidPointException{
 		if (!checkPoint(point)){
 			throw new InvalidPointException();
@@ -34,10 +43,14 @@ public class Field {
 	}
 	
 	private boolean checkPoint(final Point point){
-		return chekCoordinate(point.getX()) && chekCoordinate(point.getY());
+		return chekCoordinateX(point.getX()) && chekCoordinateY(point.getY());
 	}
 	
-	private boolean chekCoordinate(final int coordinate){
-		return coordinate > 0 && coordinate <= size;
+	private boolean chekCoordinateX(final int coordinate){
+		return coordinate > 0 && coordinate <= sizeX;
 	}
+	
+	private boolean chekCoordinateY(final int coordinate){
+		return coordinate > 0 && coordinate <= sizeY;
+	}	
 }
