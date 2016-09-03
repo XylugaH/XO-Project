@@ -43,14 +43,14 @@ public class Field {
 	}
 	
 	private boolean checkPoint(final Point point){
-		return chekCoordinateX(point.getX()) && chekCoordinateY(point.getY());
+		return checkCoordinateX(point.getX()) && checkCoordinateY(point.getY());
 	}
 	
-	private boolean chekCoordinateX(final int coordinate){
-		return coordinate > 0 && coordinate <= sizeX;
+	private boolean checkCoordinateX(final int coordinate){
+		return coordinate >= 0 && coordinate < sizeX;
 	}
 	
-	private boolean chekCoordinateY(final int coordinate){
-		return coordinate > 0 && coordinate <= sizeY;
+	private boolean checkCoordinateY(final int coordinate){
+		return coordinate >= 0 && coordinate < sizeY;
 	}	
 }
