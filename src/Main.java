@@ -19,6 +19,7 @@ public class Main {
 		final ConsoleView consoleView = new ConsoleView();
 		while(consoleView.move(game)){
 			consoleView.show(game);
+			{}
 		}
 		
 	}
